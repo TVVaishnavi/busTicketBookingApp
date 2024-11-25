@@ -14,4 +14,5 @@ const createuser=async(userdata)=>{
     const saveduser=await createuser.save()
     return saveduser
 }
+
 module.exports={createuser}

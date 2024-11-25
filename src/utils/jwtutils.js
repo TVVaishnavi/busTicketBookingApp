@@ -10,6 +10,7 @@ const generateToken=(user)=>{
       return jwt.sign(payload,secretkey,{expiresIn:"1h"})
 }
 
+
 module.exports={
     generateToken
 }

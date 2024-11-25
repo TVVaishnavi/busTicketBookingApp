@@ -1,5 +1,6 @@
 const userService=require("../service/user")
 
+
 const getUser=async(req,res)=>{
     try {
         const users=await userService.getUser()

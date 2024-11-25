@@ -8,7 +8,6 @@ const router=express.Router()
 
 router.use(cors())
       
-
 router.route("/admin/bus/createbus")
    .post(authMiddleware.authenticateToken,buscontroler.createbus)
 router.route("/admin/bus/deletebus")

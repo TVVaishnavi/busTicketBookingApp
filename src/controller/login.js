@@ -16,7 +16,7 @@ const refreshToken=async(req,res)=>{
       const newToken=await authservice.refreshToken(email,password)
       res.json({newToken:newToken})
    } catch (error) {
-      res.status(401).json({msg:"Invaild token"})
+      res.status(401).json({msg:"Invaild is token"})
    }
 }
 module.exports={

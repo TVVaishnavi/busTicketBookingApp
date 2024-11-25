@@ -8,7 +8,7 @@ mongoose.connection.on("connected",()=>{
 })
 
 mongoose.connection.on("error",(err)=>{
-    console.log(`MongoDB connection error:${err}`)
+    console.log(`MongoDB connection error :${err}`)
 })
 
 module.exports=mongoose;

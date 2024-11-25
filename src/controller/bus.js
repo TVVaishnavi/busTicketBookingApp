@@ -13,7 +13,7 @@ const createbus=async(req,res)=>{
        }
        else{
          const bus=await busservice.createbus(busdata)
-       res.status(201).json({bus:bus,"message":"bus created successfully"})
+       res.status(201).json({bus:bus,"message":"bus created is successfully"})
        }
      } catch (err) {
         console.log(err)

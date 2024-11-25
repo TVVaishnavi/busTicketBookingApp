@@ -3,7 +3,6 @@ const { v4: uuid } = require('uuid');
 const log=require("../models/log");
 
 
-
 const logevent=async(method,origin,path)=>{
     const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
     const createnewlog=new log({

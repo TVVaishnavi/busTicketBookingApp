@@ -21,4 +21,5 @@ const createAdminAccount=async()=>{
         console.error(error.message)
     }
 }
+
 module.exports=createAdminAccount

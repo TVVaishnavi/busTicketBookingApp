@@ -12,7 +12,6 @@ const {logger}=require("./middlewares/handlelog")
 const {blocker}=require("./middlewares/handlerror")
 
 
-
 app.use(bodyParser.json())
 app.use(cors())
 app.use(logger)

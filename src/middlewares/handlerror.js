@@ -3,7 +3,6 @@ const { v4: uuid } = require('uuid');
 const err=require("../models/error");
 
 
-
 const error=async(errname,errmsg)=>{
     const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
     const createnewerror=new err({

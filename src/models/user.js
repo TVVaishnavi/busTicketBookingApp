@@ -1,5 +1,6 @@
 const mongoose=require("../config/dbconfig")
 
+
 const userschema=new mongoose.Schema({
     name:String,
     email:String,
