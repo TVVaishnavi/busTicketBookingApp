@@ -1,5 +1,6 @@
 const mongoose=require("../config/dbconfig")
 
+
 const busschema=new mongoose.Schema({
     busNumber:String,
     totalSeat:Number,

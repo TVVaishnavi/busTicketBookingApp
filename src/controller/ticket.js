@@ -10,7 +10,7 @@ const bookticket=async(req,res)=>{
         if(availability.avaiableSeat.length>0 && ticketdetails.seatcount<=availability.avaiableSeat.length){
            const ticket=await ticketservice.bookticket(ticketdetails,availability.date,availability.avaiableSeat)
            const update=await ticketservice.updatebusticket(ticketdetails.seatcount,busNumber)
-           res.status(201).json({ticket:ticket,update:update,"msg":"ticket successfully booked"})
+           res.status(201).json({ticket:ticket,update:update,"msg":"ticket is successfully booked"})
         }else{
            res.json({"msg":"seat are full"})
         }

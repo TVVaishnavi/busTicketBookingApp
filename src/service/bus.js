@@ -28,6 +28,7 @@ const createbus=async(busdata)=>{
         const savebus=await createbus.save()
         return savebus
 }
+
 const updatebus=(newbusdata,oldbusdata)=>{
         const newdata={
                 busNumber:newbusdata.busNumber||oldbusdata.busNumber,

@@ -20,6 +20,7 @@ const login=async(email,password)=>{
         throw new Error("Invalid credentials")
      }
 }
+
 const refreshToken=async(oldToken)=>{
     try {
          const decodedToken=verifyToken(oldToken)

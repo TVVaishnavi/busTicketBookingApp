@@ -1,5 +1,6 @@
 const mongoose=require("../config/dbconfig")
 
+
 const ticketschema= new mongoose.Schema({
     pnr:String,
     busNumber:String,

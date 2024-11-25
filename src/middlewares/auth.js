@@ -1,6 +1,7 @@
 const jwt=require("jsonwebtoken")
 const secretkey=require("../config/jwtconfig")
 
+
 const authenticateToken=async(req,res,next)=>{
     const authHeader=req.header("Authorization")
     if(!authHeader){
