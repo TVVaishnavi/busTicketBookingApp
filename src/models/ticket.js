@@ -14,4 +14,4 @@ const ticketSchema = new mongoose.Schema({
     email:String
 })
 
-module.exports = mongoose.model("ticket",ticketSchema)
+module.exports = mongoose.model("ticket", ticketSchema)

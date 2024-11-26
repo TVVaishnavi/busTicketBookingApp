@@ -25,8 +25,8 @@ const createBus = async(busdata)=>{
         departuretime,
         date
         })
-        const savebus=await createbus.save()
-        return savebus
+        const saveBus = await createbus.save()
+        return saveBus
 }
 
 const updateBus = (newbusdata,oldbusdata)=>{
@@ -53,4 +53,4 @@ const getBusDetails = async()=>{
 
 
 
-module.exports = {createBus,updateBus,getBusDetails}
+module.exports = {createBus, updateBus, getBusDetails}

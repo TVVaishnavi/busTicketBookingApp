@@ -3,7 +3,7 @@ const User = require("../models/user")
 const {generateToken} = require("../utils/jwtutils")
 const {verifyToken} = require("../middlewares/auth")
 
-const login = async(email,password)=>{
+const login = async(email, password)=>{
      try {
         const existingUser = await User.findOne({email})
         if(!existingUser){
@@ -23,7 +23,7 @@ const login = async(email,password)=>{
 
 const refreshToken = async(oldToken)=>{
     try {
-         const decodedToken=verifyToken(oldToken)
+         const decodedToken = verifyToken(oldToken)
     const User = User.findById(decodedToken._id)
     if(!User){
         throw new error("User not found")
@@ -37,5 +37,5 @@ const refreshToken = async(oldToken)=>{
 }
 
 module.exports = {
-    login,refreshToken
+    login, refreshToken
 }

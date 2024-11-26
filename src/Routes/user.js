@@ -6,6 +6,6 @@ const router = express.Router()
 router.use(cors())
 
 router.route("/admin/view/user")  // req from admin get all user list
-     .get(authMiddleware.authenticateToken,userController.getUser)
+     .get(authMiddleware.authenticateToken, userController.getUser)
 
 module.exports = router

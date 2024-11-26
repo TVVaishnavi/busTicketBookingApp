@@ -8,4 +8,4 @@ const handlerrorSchema = new mongoose.Schema({
         errmsg:String
 })
 
-module.exports = mongoose.model("errorlog",handlerrorSchema)
+module.exports = mongoose.model("errorlog", handlerrorSchema)

@@ -14,4 +14,4 @@ const busSchema = new mongoose.Schema({
     departuretime:String,
     date:String
 })
-module.exports = mongoose.model("buses",busSchema)
+module.exports = mongoose.model("buses", busSchema)

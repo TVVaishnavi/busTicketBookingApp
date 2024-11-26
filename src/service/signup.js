@@ -3,16 +3,16 @@ const bcrypt = require("bcrypt")
 
 const createUser = async(userdata)=>{
     const {name,email,password} = userdata
-    const hashpassword = await bcrypt.hash(password,10);
-    const createuser = new User({
+    const hashPassword = await bcrypt.hash(password,10);
+    const createUser = new User({
         name,
         email,
-        password:hashpassword,
+        password:hashPassword,
         role:"customer"
     })
 
-    const saveduser = await createuser.save()
-    return saveduser
+    const savedUser = await createUser.save()
+    return savedUser
 }
 
 module.exports = {createUser}

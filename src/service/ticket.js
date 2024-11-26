@@ -86,13 +86,13 @@ const canacelTicket = async(ticketdetails)=>{
     try {
         const busNumber = ticketdetails.busNumber
         const busdetails = await buses.findOne({busNumber})
-        const seatcount = ticketdetails.seatnumber
-        const seatupdate = {
-            avaiableSeat:addSeat(busdetails.avaiableSeat,seatcount).toSorted((a, b) => a - b),
-            bookedseat:removeBookedSeat(busdetails.bookedseat,seatcount).toSorted((a, b) => a - b)
+        const seatCount = ticketdetails.seatnumber
+        const seatUpdate = {
+            avaiableSeat:addSeat(busdetails.avaiableSeat, seatCount).toSorted((a, b) => a - b),
+            bookedseat:removeBookedSeat(busdetails.bookedseat, seatCount).toSorted((a, b) => a - b)
         }
-        const updatebus = busService.updatebus(seatupdate,busdetails)
-        const bus = await buses.findOneAndUpdate({busNumber},{$set:updatebus})
+        const updateBus = busService.updateBus(seatUpdate, busdetails)
+        const bus = await buses.findOneAndUpdate({busNumber},{$set:updateBus})
         console.log("bus seats are updated",bus)
     } catch (error) {
         
@@ -104,4 +104,4 @@ const getAllTickets = async()=>{
 }
 
 
-module.exports = {bookTicket,updateBusTicket,canacelTicket,getAllTickets}
+module.exports = {bookTicket, updateBusTicket, canacelTicket, getAllTickets}

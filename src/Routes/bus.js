@@ -21,12 +21,12 @@ router.route("/user/view/search-bus")
   .post(authMiddleWare.authenticateToken, busControlLer.searchBus)
 
 router.route("/user/bus/book-ticket")
-  .post(authMiddleWare.authenticateToken,ticketController.bookticket)
+  .post(authMiddleWare.authenticateToken, ticketController.bookTicket)
 
 router.route("/user/bus/cancel/ticket")
-  .post(authMiddleWare.authenticateToken,ticketController.canacelTicket)
+  .post(authMiddleWare.authenticateToken, ticketController.cancelTicket)
 
 router.route("/user/view/bus-ticket")
-  .get(authMiddleWare.authenticateToken,ticketController.getTicket)
+  .get(authMiddleWare.authenticateToken, ticketController.getTicket)
 
 module.exports = router

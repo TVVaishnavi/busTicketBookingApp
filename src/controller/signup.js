@@ -7,13 +7,13 @@ const createUser = async(req,res)=>{
        const email = userData.email
        const existingUser = await User.findOne({email})
        if(existingUser){
-          res.json({"message":"email is already existed"})
+          res.json({message:"email is already existed"})
        }
-       const user = await userService.createuser(userdata)
-       res.status(201).json({user:user,"message":"user created successfully"})
+       const user = await userService.createUser(userdata)
+       res.status(201).json({user, message:"user created successfully"})
     }catch(err){
         console.log(err)
-        res.status(400).json({"msg":err.message})
+        res.status(400).json({message:err.message})
     }
 
 }

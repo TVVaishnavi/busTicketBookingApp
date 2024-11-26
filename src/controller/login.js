@@ -4,7 +4,7 @@ const login = async(req,res)=>{
      try {
         const {email,password} = req.body
         const token = await authService.login(email,password)
-        res.json({token:token})
+        res.json({token})
      } catch (error) {
         res.status(401).json({message:"Invaild credentials"})
      }
@@ -19,6 +19,6 @@ const refreshToken = async(req,res)=>{
       res.status(401).json({message:"Invaild is token"})
    }
 }
-module.exports={
-    login,refreshToken
+module.exports = {
+    login, refreshToken
 }
