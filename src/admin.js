@@ -3,11 +3,12 @@ const bcrypt = require("bcrypt")
 
 
 const createAdminAccount = async()=>{
+    const email=process.env.ADMIN_EMAIL
     try {
-        const existingadmin = await User.findOne({email:"admin@test.com"})
+        const existingadmin = await User.findOne({email})
         if(!existingadmin){
             const newAdmin = new User({
-                email:"admin@test.com",
+                email,
                 name:"Admin",
                 password:await bcrypt.hash("admin",10),
                 role:"admin"

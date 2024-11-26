@@ -2,7 +2,7 @@ const ticketService = require("../service/ticket")
 const buses = require("../models/bus")
 const ticket = require("../models/ticket")
 
-const bookticket = async(req,res)=>{
+const bookTicket = async(req,res)=>{
     try {
         const ticketDetails = req.body
         const busNumber = ticketDetails.busNumber
@@ -65,4 +65,4 @@ const getTicket = async(req,res)=>{
 
 }
 
-module.exports={bookticket,canacelTicket,getTicket}
+module.exports={bookTicket,canacelTicket,getTicket}

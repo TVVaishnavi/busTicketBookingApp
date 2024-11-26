@@ -1,31 +1,32 @@
 const express = require("express")
 const cors = require("cors")
-const authMiddleware = require("../middlewares/auth")
-const buscontroler = require("../controller/bus")
-const ticketcontroller = require("../controller/ticket")
+const authMiddleWare = require("../middlewares/auth")
+const busControlLer = require("../controller/bus")
+const ticketController = require("../controller/ticket")
 
 const router = express.Router()
 
 router.use(cors())
       
 router.route("/admin/bus/create-bus")
-   .post(authMiddleware.authenticateToken,buscontroler.createbus)
+   .post(authMiddleWare.authenticateToken, busControlLer.createBus)
 router.route("/admin/bus/delete-bus")
-   .delete(authMiddleware.authenticateToken,buscontroler.deletebus)
+   .delete(authMiddleWare.authenticateToken, busControlLer.deleteBus)
 router.route("/admin/bus/update-bus")
-   .put(authMiddleware.authenticateToken,buscontroler.updatebus)
+   .put(authMiddleWare.authenticateToken, busControlLer.updateBus)
 
 router.route("/user/view/bus-details")
-  .get(authMiddleware.authenticateToken,buscontroler.getbusdetails)
+  .get(authMiddleWare.authenticateToken, busControlLer.getbusdetails)
 router.route("/user/view/search-bus")
-  .post(authMiddleware.authenticateToken,buscontroler.searchbus)
+  .post(authMiddleWare.authenticateToken, busControlLer.searchBus)
 
 router.route("/user/bus/book-ticket")
-  .post(authMiddleware.authenticateToken,ticketcontroller.bookticket)
+  .post(authMiddleWare.authenticateToken,ticketController.bookticket)
 
 router.route("/user/bus/cancel/ticket")
-  .post(authMiddleware.authenticateToken,ticketcontroller.canacelticket)
+  .post(authMiddleWare.authenticateToken,ticketController.canacelTicket)
 
 router.route("/user/view/bus-ticket")
-  .get(authMiddleware.authenticateToken,ticketcontroller.getticket)
+  .get(authMiddleWare.authenticateToken,ticketController.getTicket)
+
 module.exports = router

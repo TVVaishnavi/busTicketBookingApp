@@ -3,62 +3,62 @@ const buses = require("../models/bus")
 //const bus = require("../models/bus")
 
 
-const createbus = async(req,res)=>{
+const createBus = async(req,res)=>{
      try {
         const busdata = req.body
         const busNumber = busdata.busNumber
         const existingbus = await buses.findOne({busNumber})
        if(existingbus){
-          res.json({"message":"bus already existed"})
+          res.json({message:"bus already existed"})
        }
        else{
          const bus = await busService.createbus(busdata)
-       res.status(201).json({bus:bus,"message":"bus created is successfully"})
+       res.status(201).json({bus,message:"bus created is successfully"})
        }
      } catch (err) {
         console.log(err)
-        res.status(400).json({"message":err.message})
+        res.status(400).json({message:err.message})
      }
 }
 
-const deletebus = async(req,res)=>{
+const deleteBus = async(req,res)=>{
     try {
        const busdata = req.body
        const busNumber = busdata.busNumber
        const existingbus = await buses.findOne({busNumber})
        if(!existingbus){
-          res.json({"message":"bus not found"})
+          res.json({message:"bus not found"})
        }
        else{
          const deletebus = await buses.findOneAndDelete({busNumber})
-         res.status(201).json({bus:deletebus,"message":"bus deleted successfully"})
+         res.status(201).json({bus:deletebus,message:"bus deleted successfully"})
       }
        
     } catch (err) {
         console.log(err)
-        res.status(400).json({"message":err.message})
+        res.status(400).json({message:err.message})
     }
 }
-const updatebus = async(req,res)=>{
+const updateBus = async(req,res)=>{
    const busdata = req.body
    const busNumber = busdata.busNumber
    const busexist = await buses.findOne({busNumber})
    console.log(busexist)
    if(!busexist){
-      res.json({"message":"bus not exists"})
+      res.json({message:"bus not exists"})
 
    }else{
       const newbusdata = busservice.updatebus(busdata,busexist)
       //console.log(newbusdata)
       const bus = await buses.findOneAndUpdate({busNumber},{$set:newbusdata})
-      res.status(201).json({bus:bus,"message":"bus Updated"})
+      res.status(201).json({bus:bus,message:"bus Updated"})
    }
 }
 const getbusdetails = async(req,res)=>{
       const data = await busservice.getbusdetails()
       res.status(201).json(data) 
 }
-const searchbus = async(req,res)=>{
+const searchBus = async(req,res)=>{
    try {
       const {departure,arrival,date} = req.body
       const searchbus = await buses.find({arrival,date})
@@ -70,7 +70,7 @@ const searchbus = async(req,res)=>{
       if(filterbus.length){
          res.status(201).json(filterbus)
       }else{
-         res.status(404).json({"message":"bus not found"})
+         res.status(404).json({message:"bus not found"})
       }
    } catch (err) {
       console.log(err)
@@ -80,4 +80,4 @@ const searchbus = async(req,res)=>{
 
 
 
-module.exports = {createbus,deletebus,updatebus,getbusdetails,searchbus}
+module.exports = {createBus,deleteBus,updateBus,getbusdetails,searchBus}

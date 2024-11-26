@@ -1,7 +1,7 @@
 const userService = require("../service/signup")
 const User = require('../models/user')
 
-const createuser = async(req,res)=>{
+const createUser = async(req,res)=>{
     try{
        const userData = req.body
        const email = userData.email
@@ -17,4 +17,4 @@ const createuser = async(req,res)=>{
     }
 
 }
-module.exports = {createuser}
+module.exports = {createUser}
