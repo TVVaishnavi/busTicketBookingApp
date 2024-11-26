@@ -1,12 +1,12 @@
-const User=require("./models/user")
-const bcrypt=require("bcrypt")
+const User = require("./models/user")
+const bcrypt = require("bcrypt")
 
 
-const createAdminAccount=async()=>{
+const createAdminAccount = async()=>{
     try {
-        const existingadmin=await User.findOne({email:"admin@test.com"})
+        const existingadmin = await User.findOne({email:"admin@test.com"})
         if(!existingadmin){
-            const newAdmin=new User({
+            const newAdmin = new User({
                 email:"admin@test.com",
                 name:"Admin",
                 password:await bcrypt.hash("admin",10),
@@ -22,4 +22,4 @@ const createAdminAccount=async()=>{
     }
 }
 
-module.exports=createAdminAccount
+module.exports = createAdminAccount

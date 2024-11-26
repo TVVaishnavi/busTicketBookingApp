@@ -1,6 +1,6 @@
-const buses=require("../models/bus")
+const buses = require("../models/bus")
 
-const createbus=async(busdata)=>{
+const createbus = async(busdata)=>{
      const {busNumber,
         totalSeat,
         avaiableSeat,
@@ -29,8 +29,8 @@ const createbus=async(busdata)=>{
         return savebus
 }
 
-const updatebus=(newbusdata,oldbusdata)=>{
-        const newdata={
+const updatebus = (newbusdata,oldbusdata)=>{
+        const newdata = {
                 busNumber:newbusdata.busNumber||oldbusdata.busNumber,
                 totalSeat:newbusdata.totalSeat||oldbusdata.totalSeat,
                 avaiableSeat:newbusdata.avaiableSeat||oldbusdata.avaiableSeat,
@@ -46,11 +46,11 @@ const updatebus=(newbusdata,oldbusdata)=>{
         return newdata
 }
 
-const getbusdetails=async()=>{
-        const data=await buses.find({})
+const getbusdetails = async()=>{
+        const data = await buses.find({})
         return data
 }
 
 
 
-module.exports={createbus,updatebus,getbusdetails}
+module.exports = {createbus,updatebus,getbusdetails}

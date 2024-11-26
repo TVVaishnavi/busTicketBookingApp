@@ -1,10 +1,10 @@
-const { format } = require('date-fns');
-const { v4: uuid } = require('uuid');
-const err=require("../models/error");
+const { format } = require('date-fns')
+const { v4: uuid } = require('uuid')
+const err=require("../models/error")
 
 
 const error=async(errname,errmsg)=>{
-    const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
+    const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`
     const createnewerror=new err({
         datetime:dateTime,
         id:uuid(),
@@ -19,7 +19,7 @@ const errEvents = async (name,message) => {
     try {
         const errEvent=await error(name,message)
     } catch (err) {
-        console.log(err);
+        console.log(err)
     }
 }
 
@@ -29,4 +29,4 @@ const blocker=(err,req,res,next)=>{
     next()
 }
 
-module.exports={blocker}
+module.exports = {blocker}

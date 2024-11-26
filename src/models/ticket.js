@@ -1,7 +1,7 @@
-const mongoose=require("../config/dbconfig")
+const mongoose = require("../config/dbconfig")
 
 
-const ticketschema= new mongoose.Schema({
+const ticketSchema = new mongoose.Schema({
     pnr:String,
     busNumber:String,
     seatcount:Number,
@@ -14,4 +14,4 @@ const ticketschema= new mongoose.Schema({
     email:String
 })
 
-module.exports=mongoose.model("ticket",ticketschema)
+module.exports = mongoose.model("ticket",ticketSchema)
