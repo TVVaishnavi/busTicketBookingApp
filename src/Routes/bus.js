@@ -16,7 +16,7 @@ router.route("/admin/bus/update-bus")
    .put(authMiddleWare.authenticateToken, busControlLer.updateBus)
 
 router.route("/user/view/bus-details")
-  .get(authMiddleWare.authenticateToken, busControlLer.getbusdetails)
+  .get(authMiddleWare.authenticateToken, busControlLer.getBusDetails)
 router.route("/user/view/search-bus")
   .post(authMiddleWare.authenticateToken, busControlLer.searchBus)
 

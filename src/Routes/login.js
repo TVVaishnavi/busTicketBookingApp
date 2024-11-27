@@ -1,10 +1,10 @@
 const express = require("express")
 const cors = require("cors")
-const{logIn, refreshToken} = require("../controller/login")
+const{login, refreshToken} = require("../controller/login")
 const router = express.Router()
 
 router.use(cors())
-router.post("^/admin/login$|/user/login", logIn)
-router.post("/refresh-token", refreshToken)
+router.route("^/admin/login$|/user/login").post(login)
+router.route("/refresh-token").post(refreshToken)
 
 module.exports = router

@@ -7,7 +7,7 @@ const bookTicket = async(req, res)=>{
         const ticketDetails = req.body
         const busNumber = ticketDetails.busNumber
         const availability = await buses.findOne({busNumber})
-        if(availability.avaiableSeat.length > 0 && ticketDetails.seatCount <= availability.avaiableSeat.length){
+        if(availability.availableSeat.length > 0 && ticketDetails.seatCount <= availability.avaiableSeat.length){
            const ticket = await ticketService.bookTicket(ticketDetails, availability.date, availability.avaiableSeat)
            const update = await ticketService.updateBusTicket(ticketDetails.seatCount, busNumber)
            res.status(201).json({ticket, update, message : "ticket is successfully booked"})
@@ -28,7 +28,7 @@ const cancelTicket = async(req, res)=>{
         const existingTicket = await ticket.findOne({email}) || null
         const PNR = existingTicket?.PNR 
          
-        if(existingTicket&&PNR === ticketDetails.PNR){
+        if(existingTicket && PNR === ticketDetails.PNR){
             const cancelTicket = await ticket.findOneAndDelete({PNR})
             const update = await ticketService.cancelTicket(ticketDetails)
             res.status(201).json({ticket : cancelTicket, update, message : "ticket canceled successfully"})

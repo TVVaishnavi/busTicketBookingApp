@@ -4,10 +4,10 @@ const {v1 : uuidv1} = require('uuid')
 const busService = require("../service/bus")
 
 
-const seatArrangements = (seatcount, count)=>{
+const seatArrangements = (seatCount, count)=>{
     const seats = []
     //console.log(seatcount,count)
-    for(i = 0; i<seatcount; i++){
+    for(i = 0; i<seatCount; i++){
        seats.push(count[i])
     }
     return seats
