@@ -6,10 +6,10 @@ const err = require("../models/error")
 const error = async(errname,errmsg)=>{
     const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`
     const createNewError = new err({
-        dateTime:dateTime,
-        id:uuid(),
-        errname:errname,
-        errmsg:errmsg
+        dateTime : dateTime,
+        id : uuid(),
+        errName : errName,
+        errMessage : errMessage
     })
     const saveError = await createNewError.save()
     return saveError

@@ -7,8 +7,8 @@ const createUser = async(userData)=>{
     const createUser = new User({
         name,
         email,
-        password:hashPassword,
-        role:"customer"
+        password : hashPassword,
+        role : "customer"
     })
 
     const savedUser = await createUser.save()

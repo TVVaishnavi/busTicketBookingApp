@@ -2,16 +2,16 @@ const mongoose = require("../config/dbconfig")
 
 
 const ticketSchema = new mongoose.Schema({
-    PNR:String,
-    busNumber:String,
-    seatcount:Number,
-    seatnumber:[],
-    arrival:String,
-    departure:String,
-    bookingdate:String,
-    date:String,
-    travellerdetails:[],
-    email:String
+    PNR : String,
+    busNumber : String,
+    seatCount : Number,
+    seatNumber : [],
+    arrival : String,
+    departure : String,
+    bookingDate : String,
+    date : String,
+    travellerDetails : [],
+    email : String
 })
 
 module.exports = mongoose.model("ticket", ticketSchema)

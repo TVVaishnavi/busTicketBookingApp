@@ -1,10 +1,11 @@
 const buses = require("../models/bus")
 
 const createBus = async(busdata)=>{
-     const {busNumber,
+     const {
+        busNumber,
         totalSeat,
         availableSeat,
-        bookedseat,
+        bookedSeat,
         inAC,
         arrival,
         departure,
@@ -17,7 +18,7 @@ const createBus = async(busdata)=>{
         busNumber,
         totalSeat,
         availableSeat,
-        bookedseat,
+        bookedSeat,
         inAC,
         arrival,
         departure,
@@ -32,17 +33,17 @@ const createBus = async(busdata)=>{
 
 const updateBus = (newBusData,oldBusData)=>{
         const newData = {
-                busNumber:newBusData.busNumber || oldBusData.busNumber,
-                totalSeat:newBusData.totalSeat || oldBusData.totalSeat,
-                availableSeat:newBusData.avaiableSeat || oldBusData.avaiableSeat,
-                bookedseat:newBusData.bookedseat || oldBusData.bookedseat,
-                inAC:newBusData.inAC || oldBusData.inAC,
-                arrival:newBusData.arrival || oldBusData.arrival,
-                departure:newBusData.departure || oldBusData.departure,
-                stoppings:newBusData.stoppings || oldBusData.stoppings,
-                arriveTime:newBusData.arriveTime || oldBusData.arriveTime,
-                departureTime:newBusData.departureTime || oldBusData.departureTime,
-                date:newBusData.date || oldBusData.date
+                busNumber : newBusData.busNumber || oldBusData.busNumber,
+                totalSeat : newBusData.totalSeat || oldBusData.totalSeat,
+                availableSeat : newBusData.availableSeat || oldBusData.availableSeat,
+                bookedSeat : newBusData.bookedSeat || oldBusData.bookedSeat,
+                inAC : newBusData.inAC || oldBusData.inAC,
+                arrival : newBusData.arrival || oldBusData.arrival,
+                departure : newBusData.departure || oldBusData.departure,
+                stoppings : newBusData.stoppings || oldBusData.stoppings,
+                arriveTime : newBusData.arriveTime || oldBusData.arriveTime,
+                departureTime : newBusData.departureTime || oldBusData.departureTime,
+                date : newBusData.date || oldBusData.date
         }
                 //console.log(newdata)
         return newData

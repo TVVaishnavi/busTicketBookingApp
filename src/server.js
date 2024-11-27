@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const PORT = process.env.PORT||3000
 const cors = require("cors")
-const signUpRouter = require("./Routes/signup")
+const signupRouter = require("./Routes/signup")
 const bodyParser = require("body-parser")
 const createAdminAccount = require("./admin")
 const loginRouter = require("./Routes/login")
@@ -17,7 +17,7 @@ app.use(logger)
 
 createAdminAccount()
 
-app.use("/",signUpRouter)
+app.use("/", signupRouter)
 app.use("/auth", loginRouter, userRouter, busRouter)
 
 
