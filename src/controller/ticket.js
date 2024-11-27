@@ -1,62 +1,62 @@
-const ticketservice=require("../service/ticket")
-const buses=require("../models/bus")
-const ticket=require("../models/ticket")
+const ticketService = require("../service/ticket")
+const buses = require("../models/bus")
+const ticket = require("../models/ticket")
 
-const bookticket=async(req,res)=>{
+const bookTicket = async(req, res)=>{
     try {
-        const ticketdetails=req.body
-        const busNumber=ticketdetails.busNumber
-        const availability=await buses.findOne({busNumber})
-        if(availability.avaiableSeat.length>0 && ticketdetails.seatcount<=availability.avaiableSeat.length){
-           const ticket=await ticketservice.bookticket(ticketdetails,availability.date,availability.avaiableSeat)
-           const update=await ticketservice.updatebusticket(ticketdetails.seatcount,busNumber)
-           res.status(201).json({ticket:ticket,update:update,"msg":"ticket successfully booked"})
+        const ticketDetails = req.body
+        const busNumber = ticketDetails.busNumber
+        const availability = await buses.findOne({busNumber})
+        if(availability.avaiableSeat.length > 0 && ticketDetails.seatCount <= availability.avaiableSeat.length){
+           const ticket = await ticketService.bookTicket(ticketDetails, availability.date, availability.avaiableSeat)
+           const update = await ticketService.updateBusTicket(ticketDetails.seatCount, busNumber)
+           res.status(201).json({ticket, update, message : "ticket is successfully booked"})
         }else{
-           res.json({"msg":"seat are full"})
+           res.json({message : "seat are full"})
         }
     } catch (err) {
         console.log(err)
-        res.json({err:err,message:" oofhs! something wrong"})
+        res.json({err, message : " oops! something wrong"})
     }
     
 }
 
-const canacelticket=async(req,res)=>{
+const cancelTicket = async(req, res)=>{
     try {
-        const ticketdetails=req.body
-        const email=ticketdetails.email
-        const existingticket=await ticket.findOne({email}) || null
-        const pnr=existingticket?.pnr 
+        const ticketDetails = req.body
+        const email = ticketDetails.email
+        const existingTicket = await ticket.findOne({email}) || null
+        const PNR = existingTicket?.PNR 
          
-        if(existingticket&&pnr===ticketdetails.pnr){
-            const cancelticket=await ticket.findOneAndDelete({pnr})
-            const update=await ticketservice.canacelticket(ticketdetails)
-            res.status(201).json({ticket:cancelticket,upadate:update,"msg":"ticket canceled successfully"})
+        if(existingTicket&&PNR === ticketDetails.PNR){
+            const cancelTicket = await ticket.findOneAndDelete({PNR})
+            const update = await ticketService.cancelTicket(ticketDetails)
+            res.status(201).json({ticket : cancelTicket, update, message : "ticket canceled successfully"})
         }else{
-            res.status(404).json({"msg":"ticket not found"})
+            res.status(404).json({message : "ticket not found"})
         }
         
     } catch (err) {
         console.log(err)
-        res.json({err:err,message:"ticket isnt canceled,something wrong"})
+        res.json({err, message : "ticket isnt canceled,something wrong"})
         
     }
 }
 
 
-const getticket=async(req,res)=>{
-    const {email}=req.body
-    if(email==="admin@test.com"){
-        const allticket=await ticketservice.getalltickets()
-        res.status(201).json(allticket)
+const getTicket = async(req, res)=>{
+    const {email} = req.body
+    if(email === ADMIN_EMAIL){
+        const allTicket = await ticketService.getAllTickets()
+        res.status(201).json(allTicket)
     }
     else{
     try{
-       const usticket=await ticket.findOne({email})
-       if(!usticket){
-       res.status(404).json({"msg":"ticket not found"})
+       const usTicket = await ticket.findOne({email})
+       if(!usTicket){
+       res.status(404).json({message : "ticket not found"})
        }
-       res.status(201).json(usticket)
+       res.status(201).json(usTicket)
     }catch(err){
        console.log(err)
     }
@@ -65,4 +65,4 @@ const getticket=async(req,res)=>{
 
 }
 
-module.exports={bookticket,canacelticket,getticket}
+module.exports={bookTicket, cancelTicket, getTicket}

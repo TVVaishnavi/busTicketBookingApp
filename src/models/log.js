@@ -1,12 +1,13 @@
 const { stringify } = require("uuid")
-const mongoose=require("../config/dbconfig")
+const mongoose = require("../config/dbconfig")
 
-const logicschema=new mongoose.Schema({
-        datetime:String,
-        id:String,
-        method:String,
-        origin:String,
-        path:String
+
+const logicSchema = new mongoose.Schema({
+        dateTime : String,
+        id : String,
+        method : String,
+        origin : String,
+        path : String
 })
 
-module.exports=mongoose.model("logs",logicschema)
+module.exports = mongoose.model("logs", logicSchema)

@@ -1,55 +1,59 @@
-const buses=require("../models/bus")
+const buses = require("../models/bus")
 
-const createbus=async(busdata)=>{
-     const {busNumber,
-        totalSeat,
-        avaiableSeat,
-        bookedseat,
-        inAC,
-        arrival,
-        departure,
-        stopings,
-        arivetime,
-        departuretime,
-        date}=busdata
-        const createbus=new buses({
+const createBus = async(busdata)=>{
+     const {
         busNumber,
         totalSeat,
-        avaiableSeat,
-        bookedseat,
+        availableSeat,
+        bookedSeat,
         inAC,
         arrival,
         departure,
-        stopings,
-        arivetime,
-        departuretime,
+        stoppings,
+        arriveTime,
+        departureTime,
+        date
+     }=busdata
+        const createBus=new buses({
+        busNumber,
+        totalSeat,
+        availableSeat,
+        bookedSeat,
+        inAC,
+        arrival,
+        departure,
+        stoppings,
+        arriveTime,
+        departureTime,
         date
         })
-        const savebus=await createbus.save()
-        return savebus
-}
-const updatebus=(newbusdata,oldbusdata)=>{
-        const newdata={
-                busNumber:newbusdata.busNumber||oldbusdata.busNumber,
-                totalSeat:newbusdata.totalSeat||oldbusdata.totalSeat,
-                avaiableSeat:newbusdata.avaiableSeat||oldbusdata.avaiableSeat,
-                bookedseat:newbusdata.bookedseat||oldbusdata.bookedseat,
-                inAC:newbusdata.inAC||oldbusdata.inAC,
-                arrival:newbusdata.arrival||oldbusdata.arrival,
-                departure:newbusdata.departure||oldbusdata.departure,
-                stopings:newbusdata.stopings||oldbusdata.stopings,
-                arivetime:newbusdata.arivetime||oldbusdata.arivetime,
-                departuretime:newbusdata.departuretime||oldbusdata.departuretime,
-                date:newbusdata.date||oldbusdata.date}
-                //console.log(newdata)
-        return newdata
+        const saveBus = await createBus.save()
+        return saveBus
 }
 
-const getbusdetails=async()=>{
-        const data=await buses.find({})
+const updateBus = (newBusData,oldBusData)=>{
+        const newData = {
+                busNumber : newBusData.busNumber || oldBusData.busNumber,
+                totalSeat : newBusData.totalSeat || oldBusData.totalSeat,
+                availableSeat : newBusData.availableSeat || oldBusData.availableSeat,
+                bookedSeat : newBusData.bookedSeat || oldBusData.bookedSeat,
+                inAC : newBusData.inAC || oldBusData.inAC,
+                arrival : newBusData.arrival || oldBusData.arrival,
+                departure : newBusData.departure || oldBusData.departure,
+                stoppings : newBusData.stoppings || oldBusData.stoppings,
+                arriveTime : newBusData.arriveTime || oldBusData.arriveTime,
+                departureTime : newBusData.departureTime || oldBusData.departureTime,
+                date : newBusData.date || oldBusData.date
+        }
+                //console.log(newdata)
+        return newData
+}
+
+const getBusDetails = async()=>{
+        const data = await buses.find({})
         return data
 }
 
 
 
-module.exports={createbus,updatebus,getbusdetails}
+module.exports = {createBus, updateBus, getBusDetails}

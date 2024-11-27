@@ -1,20 +1,20 @@
-const userservice=require("../service/signup")
-const User=require('../models/user')
+const userService = require("../service/signup")
+const User = require('../models/user')
 
-const createuser=async(req,res)=>{
+const createUser = async(req, res)=>{
     try{
-       const userdata=req.body
-       const email=userdata.email
-       const existingUser=await User.findOne({email})
+       const userData = req.body
+       const email = userData.email
+       const existingUser = await User.findOne({email})
        if(existingUser){
-          res.json({"message":"email already existed"})
+          res.json({message : "email is already existed"})
        }
-       const user=await userservice.createuser(userdata)
-       res.status(201).json({user:user,"message":"user created successfully"})
+       const user = await userService.createUser(userData)
+       res.status(201).json({user, message : "user created successfully"})
     }catch(err){
         console.log(err)
-        res.status(400).json({"msg":err.message})
+        res.status(400).json({message : err.message})
     }
 
 }
-module.exports={createuser}
+module.exports = {createUser}

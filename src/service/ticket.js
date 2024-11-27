@@ -1,106 +1,107 @@
-const ticket=require("../models/ticket")
-const buses=require("../models/bus")
+const ticket = require("../models/ticket")
+const buses = require("../models/bus")
 const {v1 : uuidv1} = require('uuid')
-const busservice=require("../service/bus")
+const busService = require("../service/bus")
 
 
-const seatarrangements=(seatcount,count)=>{
-    const seats=[]
+const seatArrangements = (seatcount, count)=>{
+    const seats = []
     //console.log(seatcount,count)
-    for(i=0;i<seatcount;i++){
+    for(i = 0; i<seatcount; i++){
        seats.push(count[i])
     }
     return seats
 }
 
-const removelemnts=(set,count)=>{
-    for(i=0;i<count.length;i++){
+const removeElements = (set, count)=>{
+    for(i = 0; i<count.length; i++){
         set.remove(count[i])
     }
     return set
 }
-const addelemnts=(set,count)=>{
-    for(i=0;i<count.length;i++){
+
+const addElements = (set, count)=>{
+    for(i = 0; i<count.length; i++){
         set.push(count[i])
     }
     return set
 }
 
-const addseat=(seat,count)=>{
-    for(i=0;i<count.length;i++){
+const addSeat = (seat, count)=>{
+    for(i = 0; i<count.length; i++){
         seat.push(count[i])
     }
     return seat
 }
 
-const removebookedseat=(seat,count)=>{
-    for(i=0;i<count.length;i++){
+const removeBookedSeat = (seat, count)=>{
+    for(i = 0; i<count.length; i++){
         seat.remove(count[i])
     }
     return seat
 }
 
-const bookticket=async(ticketdetails,date,avaiableSeat)=>{
+const bookTicket = async(ticketDetails, date, availableSeat)=>{
     const {
         busNumber,
-        seatcount,
+        seatCount,
         arrival,
         departure,
-        bookingdate,
-        travellerdetails,
-        email}=ticketdetails 
-    const pnrid =uuidv1() 
-    const bookticket=new ticket({
-        pnr:pnrid,
+        bookingDate,
+        travellerDetails,
+        email} = ticketDetails 
+    const PNRid = uuidv1() 
+    const bookTicket = new ticket({
+        PNR : PNRid,
         busNumber,
-        seatcount,
-        seatnumber:seatarrangements(seatcount,avaiableSeat),
+        seatCount,
+        seatNumber : seatArrangements(seatCount, availableSeat),
         arrival,
         departure,
-        bookingdate,
-        date:date,
-        travellerdetails,
+        bookingDate,
+        date : date,
+        travellerDetails,
         email
     })
-    const saveticket=await bookticket.save()
-    return saveticket
+    const saveTicket = await bookTicket.save()
+    return saveTicket
 }
 
-const updatebusticket=async(count,busNumber)=>{
+const updateBusTicket = async(count, busNumber)=>{
     try {
-        const busdetails=await buses.findOne({busNumber})
-        const seatcount=seatarrangements(count,busdetails.avaiableSeat)
-        const seatupdate={
-            avaiableSeat:removelemnts(busdetails.avaiableSeat,seatcount).toSorted((a, b) => a - b),
-            bookedseat:addelemnts(busdetails.bookedseat,seatcount).toSorted((a, b) => a - b)
+        const busDetails = await buses.findOne({busNumber})
+        const seatCount = seatArrangements(count, busDetails.availableSeat)
+        const seatUpdate = {
+            availableSeat : removeElements(busDetails.availableSeat, seatCount).toSorted((a, b) => a - b),
+            bookedSeat : addElements(busDetails.bookedSeat, seatCount).toSorted((a, b) => a - b)
         }
-        const updatebus=busservice.updatebus(seatupdate,busdetails)
-        const bus=await buses.findOneAndUpdate({busNumber},{$set:updatebus})
-        console.log("bus seats are updated",bus)
+        const updateBus = busService.updateBus(seatUpdate, busDetails)
+        const bus = await buses.findOneAndUpdate({busNumber}, {$set:updateBus})
+        console.log("bus seats are updated", bus)
     } catch (err) {
         console.log(err)
     }
 }
-const canacelticket=async(ticketdetails)=>{
+const canacelTicket = async(ticketDetails)=>{
     try {
-        const busNumber=ticketdetails.busNumber
-        const busdetails=await buses.findOne({busNumber})
-        const seatcount=ticketdetails.seatnumber
-        const seatupdate={
-            avaiableSeat:addseat(busdetails.avaiableSeat,seatcount).toSorted((a, b) => a - b),
-            bookedseat:removebookedseat(busdetails.bookedseat,seatcount).toSorted((a, b) => a - b)
+        const busNumber = ticketDetails.busNumber
+        const busDetails = await buses.findOne({busNumber})
+        const seatCount = ticketDetails.seatnumber
+        const seatUpdate = {
+            avaiableSeat : addSeat(busDetails.avaiableSeat, seatCount).toSorted((a, b) => a - b),
+            bookedSeat : removeBookedSeat(busDetails.bookedseat, seatCount).toSorted((a, b) => a - b)
         }
-        const updatebus=busservice.updatebus(seatupdate,busdetails)
-        const bus=await buses.findOneAndUpdate({busNumber},{$set:updatebus})
-        console.log("bus seats are updated",bus)
+        const updateBus = busService.updateBus(seatUpdate, busdetails)
+        const bus = await buses.findOneAndUpdate({busNumber}, {$set:updateBus})
+        console.log("bus seats are updated", bus)
     } catch (error) {
         
     }
 }
-const getalltickets=async()=>{
+const getAllTickets = async()=>{
     const data = await ticket.find({})
     return data
 }
 
 
-module.exports={bookticket,updatebusticket,canacelticket,getalltickets}
+module.exports = {bookTicket, updateBusTicket, canacelTicket, getAllTickets}
