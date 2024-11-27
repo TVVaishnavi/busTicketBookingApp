@@ -1,9 +1,8 @@
 const busService = require("../service/bus")
 const buses = require("../models/bus")
-//const bus = require("../models/bus")
 
 
-const createBus = async(req,res)=>{
+const createBus = async(req, res)=>{
      try {
         const busData = req.body
         const busNumber = busData.busNumber
@@ -21,7 +20,7 @@ const createBus = async(req,res)=>{
      }
 }
 
-const deleteBus = async(req,res)=>{
+const deleteBus = async(req, res)=>{
     try {
        const busData = req.body
        const busNumber = busData.busNumber
@@ -39,7 +38,7 @@ const deleteBus = async(req,res)=>{
         res.status(400).json({message:err.message})
     }
 }
-const updateBus = async(req,res)=>{
+const updateBus = async(req, res)=>{
    const busData = req.body
    const busNumber = busData.busNumber
    const busExist = await buses.findOne({busNumber})
@@ -54,14 +53,14 @@ const updateBus = async(req,res)=>{
       res.status(201).json({bus, message:"bus Updated"})
    }
 }
-const getBusDetails = async(req,res)=>{
+const getBusDetails = async(req, res)=>{
       const data = await busService.getBusDetails()
       res.status(201).json(data) 
 }
-const searchBus = async(req,res)=>{
+const searchBus = async(req, res)=>{
    try {
-      const {departure,arrival,date} = req.body
-      const searchBus = await buses.find({arrival,date})
+      const {departure, arrival, date} = req.body
+      const searchBus = await buses.find({arrival, date})
       const filterBus = searchBus.filter((bus)=>{
          if(bus.departure === departure){
             return bus

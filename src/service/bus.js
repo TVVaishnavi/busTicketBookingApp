@@ -3,47 +3,49 @@ const buses = require("../models/bus")
 const createBus = async(busdata)=>{
      const {busNumber,
         totalSeat,
-        avaiableSeat,
+        availableSeat,
         bookedseat,
         inAC,
         arrival,
         departure,
-        stopings,
-        arivetime,
-        departuretime,
-        date}=busdata
-        const createbus=new buses({
+        stoppings,
+        arriveTime,
+        departureTime,
+        date
+     }=busdata
+        const createBus=new buses({
         busNumber,
         totalSeat,
-        avaiableSeat,
+        availableSeat,
         bookedseat,
         inAC,
         arrival,
         departure,
-        stopings,
-        arivetime,
-        departuretime,
+        stoppings,
+        arriveTime,
+        departureTime,
         date
         })
-        const saveBus = await createbus.save()
+        const saveBus = await createBus.save()
         return saveBus
 }
 
-const updateBus = (newbusdata,oldbusdata)=>{
-        const newdata = {
-                busNumber:newbusdata.busNumber||oldbusdata.busNumber,
-                totalSeat:newbusdata.totalSeat||oldbusdata.totalSeat,
-                avaiableSeat:newbusdata.avaiableSeat||oldbusdata.avaiableSeat,
-                bookedseat:newbusdata.bookedseat||oldbusdata.bookedseat,
-                inAC:newbusdata.inAC||oldbusdata.inAC,
-                arrival:newbusdata.arrival||oldbusdata.arrival,
-                departure:newbusdata.departure||oldbusdata.departure,
-                stopings:newbusdata.stopings||oldbusdata.stopings,
-                arivetime:newbusdata.arivetime||oldbusdata.arivetime,
-                departuretime:newbusdata.departuretime||oldbusdata.departuretime,
-                date:newbusdata.date||oldbusdata.date}
+const updateBus = (newBusData,oldBusData)=>{
+        const newData = {
+                busNumber:newBusData.busNumber || oldBusData.busNumber,
+                totalSeat:newBusData.totalSeat || oldBusData.totalSeat,
+                availableSeat:newBusData.avaiableSeat || oldBusData.avaiableSeat,
+                bookedseat:newBusData.bookedseat || oldBusData.bookedseat,
+                inAC:newBusData.inAC || oldBusData.inAC,
+                arrival:newBusData.arrival || oldBusData.arrival,
+                departure:newBusData.departure || oldBusData.departure,
+                stoppings:newBusData.stoppings || oldBusData.stoppings,
+                arriveTime:newBusData.arriveTime || oldBusData.arriveTime,
+                departureTime:newBusData.departureTime || oldBusData.departureTime,
+                date:newBusData.date || oldBusData.date
+        }
                 //console.log(newdata)
-        return newdata
+        return newData
 }
 
 const getBusDetails = async()=>{

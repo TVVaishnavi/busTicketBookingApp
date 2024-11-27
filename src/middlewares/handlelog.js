@@ -6,7 +6,7 @@ const log = require("../models/log")
 const logevent = async(method, origin, path)=>{
     const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`
     const createNewLog=new log({
-        datetime:dateTime,
+        dateTime:dateTime,
         id:uuid(),
         method:method,
         origin:origin,

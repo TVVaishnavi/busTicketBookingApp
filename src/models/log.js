@@ -3,7 +3,7 @@ const mongoose = require("../config/dbconfig")
 
 
 const logicSchema = new mongoose.Schema({
-        datetime:String,
+        dateTime:String,
         id:String,
         method:String,
         origin:String,

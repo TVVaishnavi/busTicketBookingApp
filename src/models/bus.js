@@ -9,9 +9,9 @@ const busSchema = new mongoose.Schema({
     inAC:Boolean,
     arrival:String,
     departure:String,
-    stopings:[String],
-    arivetime:String,
-    departuretime:String,
+    stoppings:[String],
+    arriveTime:String,
+    departureTime:String,
     date:String
 })
 module.exports = mongoose.model("buses", busSchema)

@@ -1,11 +1,11 @@
 const mongoose = require("../config/dbconfig")
 
 
-const handlerrorSchema = new mongoose.Schema({
-        datetime:String,
+const handleErrorSchema = new mongoose.Schema({
+        dateTime:String,
         id:String,
         errname:String,
         errmsg:String
 })
 
-module.exports = mongoose.model("errorlog", handlerrorSchema)
+module.exports = mongoose.model("errorlog", handleErrorSchema)
