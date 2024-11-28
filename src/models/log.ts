@@ -10,11 +10,32 @@ interface ILogic extends Document {
 }
 
 const logicSchema: Schema = new Schema({
-  dateTime: { type: String, required: true },
-  id: { type: String, required: true },
-  method: { type: String, required: true },
-  origin: { type: String, required: true },
-  path: { type: String, required: true }
+  dateTime: 
+  { 
+    type: String, 
+    required: true 
+  },
+  id: 
+  { 
+    type: String, 
+    required: true 
+  },
+  method: 
+  { 
+    type: String, 
+    required: true 
+  },
+  origin: 
+  { 
+    type: String, 
+    required: true 
+  },
+  path: 
+  { 
+    type: String, 
+    required: true 
+  }
+  
 });
 
 export default mongoose.model<ILogic>("logs", logicSchema);

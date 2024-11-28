@@ -9,10 +9,26 @@ interface IHandleError extends Document {
 }
 
 const handleErrorSchema: Schema<IHandleError> = new Schema({
-    dateTime: { type: String, required: true },
-    id: { type: String, required: true },
-    errName: { type: String, required: true },
-    errMessage: { type: String, required: true }
+    dateTime: 
+    { 
+        type: String, 
+        required: true 
+    },
+    id: 
+    { 
+        type: String, 
+        required: true 
+    },
+    errName: 
+    { 
+        type: String, 
+        required: true 
+    },
+    errMessage: 
+    { 
+        type: String, 
+        required: true 
+    }
 });
 
 export default mongoose.model<IHandleError>("errorlog", handleErrorSchema);

@@ -9,10 +9,28 @@ interface IUser extends Document {
 }
 
 const userSchema: Schema<IUser> = new Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['admin', 'customer'], default: 'customer' }
+  name: 
+  { 
+    type: String, 
+    required: true 
+  },
+  email: 
+  { 
+    type: String, 
+    required: true 
+  },
+  password: 
+  { 
+    type: String, 
+    required: true 
+  },
+  role: 
+  { 
+    type: String, 
+    enum: ['admin', 'customer'], 
+    default: 'customer'
+  }
+  
 });
 
 export default mongoose.model<IUser>('user', userSchema);
