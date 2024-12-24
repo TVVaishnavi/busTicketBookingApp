@@ -2,8 +2,10 @@ const buses = require("../models/bus")
 
 const createBus = async(busdata)=>{
      const {
+        busName,
         busNumber,
         totalSeat,
+        busType,
         availableSeat,
         bookedSeat,
         inAC,
@@ -15,8 +17,10 @@ const createBus = async(busdata)=>{
         date
      }=busdata
         const createBus=new buses({
+        busName,
         busNumber,
         totalSeat,
+        BusType:busType,
         availableSeat,
         bookedSeat,
         inAC,
@@ -27,12 +31,14 @@ const createBus = async(busdata)=>{
         departureTime,
         date
         })
+        console.log(availableSeat)
         const saveBus = await createBus.save()
         return saveBus
 }
 
 const updateBus = (newBusData,oldBusData)=>{
         const newData = {
+                busName : newBusData.busName || oldBusData.busName,
                 busNumber : newBusData.busNumber || oldBusData.busNumber,
                 totalSeat : newBusData.totalSeat || oldBusData.totalSeat,
                 availableSeat : newBusData.availableSeat || oldBusData.availableSeat,

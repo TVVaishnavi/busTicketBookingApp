@@ -2,9 +2,11 @@ const mongoose = require("../config/dbconfig")
 
 
 const busSchema = new mongoose.Schema({
+    busName : String,
     busNumber : String,
     totalSeat : Number,
-    availableSeat : [],
+    Bustype:String,
+    availableSeat : {},
     bookedSeat : [],
     inAC : Boolean,
     arrival : String,

@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken")
-const secretKey = require("../config/jwtconfig")
+const {secretKey}=require('../config/jwtconfig')
+require('dotenv').config()
 
 
 const authenticateToken = async(req, res, next)=>{
     const authHeader = req.header("Authorization")
+    console.log(authHeader)
     if(!authHeader){
         return res.status(401).json({message : "unauthorized:Missing Token"})
 
@@ -12,7 +14,7 @@ const authenticateToken = async(req, res, next)=>{
     if(bearer!=="Bearer" || !token){
         return res.status(401).json({message : "unauthorized:Invalid token format"})
     }
-    jwt.verify(token, secretKey, (err, user)=>{
+    jwt.verify(token,secretKey, (err, user)=>{
         if(err){
             return res.status(403).json({message : "forbidden:Invalid token"})
         }
@@ -21,6 +23,6 @@ const authenticateToken = async(req, res, next)=>{
     })
 }
 const verifyToken = (token)=>{
-    return jwt.verify(token, secretKey)
+    return jwt.verify(token,secretKey)
 }
 module.exports = {authenticateToken, verifyToken}

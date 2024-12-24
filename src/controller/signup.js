@@ -9,10 +9,12 @@ const createUser = async(req, res)=>{
        if(existingUser){
           res.json({message : "email is already existed"})
        }
+       else{
        const user = await userService.createUser(userData)
-       res.status(201).json({user, message : "user created successfully"})
+       res.status(201).json({message : "user created successfully",permisson:true})
+       }
     }catch(err){
-        console.log(err)
+        console.log(err,' jjj')
         res.status(400).json({message : err.message})
     }
 

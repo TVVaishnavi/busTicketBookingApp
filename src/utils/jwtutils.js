@@ -1,13 +1,15 @@
-const jwt = require("jsonwebtoken")
-const {secretkey} = require("../config/jwtconfig")
+const jwt=require('jsonwebtoken')
+const {secretKey}=require('../config/jwtconfig')
 
-const generateToken = (user)=>{
+
+const generateToken = async(user)=>{
       const payload = {
         id : user._id,
         email : user.email,
         role : user.role
       }
-      return jwt.sign(payload, secretkey, {expiresIn : "1h"})
+      const token=jwt.sign(payload,secretKey, {expiresIn : "1h"})
+      return token
 }
 
 

@@ -18,7 +18,7 @@ const logEvent = async(method, origin, path)=>{
 }
 const logEvents = async (method, origin, path) => {
     try {
-        const logEvent = await logEvent(method, origin, path)
+        const logEven = await logEvent(method, origin, path)
     } catch (err) {
         console.log(err)
     }

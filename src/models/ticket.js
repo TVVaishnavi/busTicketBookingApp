@@ -3,6 +3,7 @@ const mongoose = require("../config/dbconfig")
 
 const ticketSchema = new mongoose.Schema({
     PNR : String,
+    busName : String,
     busNumber : String,
     seatCount : Number,
     seatNumber : [],

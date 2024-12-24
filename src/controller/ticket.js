@@ -2,14 +2,16 @@ const ticketService = require("../service/ticket")
 const buses = require("../models/bus")
 const ticket = require("../models/ticket")
 
+require('dotenv').config()
+
 const bookTicket = async(req, res)=>{
     try {
         const ticketDetails = req.body
         const busNumber = ticketDetails.busNumber
         const availability = await buses.findOne({busNumber})
-        if(availability.availableSeat.length > 0 && ticketDetails.seatCount <= availability.avaiableSeat.length){
-           const ticket = await ticketService.bookTicket(ticketDetails, availability.date, availability.avaiableSeat)
-           const update = await ticketService.updateBusTicket(ticketDetails.seatCount, busNumber)
+        if(availability.availableSeat.length > 0 && ticketDetails.seatCount <= availability.availableSeat.length){
+           const ticket = await ticketService.bookTicket(ticketDetails, availability.date, availability.availableSeat)
+           const update = await ticketService.updateBusTicket(ticketDetails.seatNumber, busNumber)
            res.status(201).json({ticket, update, message : "ticket is successfully booked"})
         }else{
            res.json({message : "seat are full"})
@@ -30,7 +32,7 @@ const cancelTicket = async(req, res)=>{
          
         if(existingTicket && PNR === ticketDetails.PNR){
             const cancelTicket = await ticket.findOneAndDelete({PNR})
-            const update = await ticketService.cancelTicket(ticketDetails)
+            const update = await ticketService.canacelTicket(ticketDetails)
             res.status(201).json({ticket : cancelTicket, update, message : "ticket canceled successfully"})
         }else{
             res.status(404).json({message : "ticket not found"})
@@ -45,18 +47,22 @@ const cancelTicket = async(req, res)=>{
 
 
 const getTicket = async(req, res)=>{
-    const {email} = req.body
-    if(email === ADMIN_EMAIL){
-        const allTicket = await ticketService.getAllTickets()
+    const {email} = req.user
+    //console.log(email)
+    const allTicket = await ticketService.getAllTickets()
+    if(email === process.env.ADMIN_EMAIL){
+        console.log(allTicket)
         res.status(201).json(allTicket)
     }
     else{
     try{
-       const usTicket = await ticket.findOne({email})
-       if(!usTicket){
+       const filter=allTicket.filter((r)=>{if(r.email===email)return r})
+       if(!filter.length){
        res.status(404).json({message : "ticket not found"})
        }
-       res.status(201).json(usTicket)
+       else{
+        res.status(201).json(filter)
+       }
     }catch(err){
        console.log(err)
     }
