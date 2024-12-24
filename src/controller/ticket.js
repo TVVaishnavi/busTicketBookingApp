@@ -9,13 +9,27 @@ const bookTicket = async(req, res)=>{
         const ticketDetails = req.body
         const busNumber = ticketDetails.busNumber
         const availability = await buses.findOne({busNumber})
-        if(availability.availableSeat.length > 0 && ticketDetails.seatCount <= availability.availableSeat.length){
-           const ticket = await ticketService.bookTicket(ticketDetails, availability.date, availability.availableSeat)
-           const update = await ticketService.updateBusTicket(ticketDetails.seatNumber, busNumber)
-           res.status(201).json({ticket, update, message : "ticket is successfully booked"})
-        }else{
-           res.json({message : "seat are full"})
+        let totalAvaSeat;
+        if (availability.availableSeat.upper && availability.availableSeat.lower) {
+            totalAvaSeat= availability.availableSeat.upper.first.length+availability.availableSeat.upper.second.length+availability.availableSeat.lower.first.length+availability.availableSeat.lower.second.length
+            if(totalAvaSeat > 0 && ticketDetails.seatNumbers.length <= totalAvaSeat){
+                const ticket = await ticketService.bookTicket(ticketDetails, availability.date, availability.availableSeat)
+                const update = await ticketService.updateBusTicket(ticketDetails.seatNumbers, busNumber)
+                res.status(201).json({ticket, update, message : "ticket is successfully booked"})
+             }else{
+                res.json({message : "seat are full"})
+             }
+        }else if(availability.availableSeat.lower){
+            totalAvaSeat=availability.availableSeat.lower.first.length+availability.availableSeat.lower.second.length
+            if(totalAvaSeat > 0 && ticketDetails.seatNumbers.length <= totalAvaSeat){
+                const ticket = await ticketService.bookTicket(ticketDetails, availability.date, availability.availableSeat)
+                const update = await ticketService.updateBusTicket(ticketDetails.seatNumbers, busNumber)
+                res.status(201).json({ticket, update, message : "ticket is successfully booked"})
+             }else{
+                res.json({message : "seat are full"})
+             }
         }
+        
     } catch (err) {
         console.log(err)
         res.json({err, message : " oops! something wrong"})
